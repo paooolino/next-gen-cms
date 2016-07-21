@@ -1,0 +1,27 @@
+{
+  "name": "next-gen-cms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paooolino/next-gen-cms.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paooolino/next-gen-cms/issues"
+  },
+  "homepage": "https://github.com/paooolino/next-gen-cms#readme",
+  "devDependencies": {
+    "expect": "^1.20.2",
+    "mocha": "^2.5.3"
+  }
+}
