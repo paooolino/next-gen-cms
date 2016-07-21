@@ -7,6 +7,12 @@
    */  
   class DataEngine {
     
+    public $db;
+    
+    function __construct($db) {
+      $this->db = $db;
+    }
+    
     /**
      * Retrieve an element given lang and slug.
      *
