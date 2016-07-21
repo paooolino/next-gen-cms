@@ -5,7 +5,7 @@ composer install
 
 Running tests
 ---------------
-vendor/bin/phpunit tests
+vendor/bin/phpunit test
 (an html coverage report is generated in the coverage folder)
 
 
