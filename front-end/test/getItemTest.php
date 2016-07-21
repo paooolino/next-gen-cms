@@ -13,9 +13,9 @@
       $this->de = new \NGCMS\DataEngine($this->db);
     }
     
-		public function setUp() {
-			$this->de->db->exec(file_get_contents("test/startup_database.sql"));	
-		}
+    public function setUp() {
+      $this->de->db->exec(file_get_contents("test/startup_database.sql"));	
+    }
     
     public function testGetItem() {
       
