@@ -39,6 +39,12 @@
       $this->assertFalse($item, "a wrong level-3 item");
     }
     
+    public function testGetTemplateForItem() {
+      $template = $this->de->getTemplateForItem();
+      
+      $this->assertEquals(1,2);
+    }
+    
     public function tearDown() {
       //
     }

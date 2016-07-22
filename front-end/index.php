@@ -12,6 +12,8 @@
   $request = str_replace("?" . $_SERVER["QUERY_STRING"], "", $request);
   
   $item = $de->getItemFromRequest($request);
-    
-  print_r($item);
+  
+  $template = $de->getTemplateForItem($item["id"]);
+  
+  include("templates/$template" . ".php");
   
