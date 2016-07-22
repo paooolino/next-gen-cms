@@ -15,35 +15,43 @@ DROP TABLE IF EXISTS `items`;
 CREATE TABLE IF NOT EXISTS `items` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `parent_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `visible_for_all_languages` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- Dump dei dati della tabella ngcms.items: 7 rows
+/*!40000 ALTER TABLE `items` DISABLE KEYS */;
+REPLACE INTO `items` (`id`, `parent_id`, `name`, `visible_for_all_languages`) VALUES
+	(1, 0, 'prodotti', 1),
+	(2, 1, 'donna', 1),
+	(3, 1, 'uomo', 1),
+	(4, 2, 'gonna', 1),
+	(5, 2, 'pinocchietto', 1),
+	(6, 3, 'jeans', 1),
+	(7, 3, 'kilt', 0);
+/*!40000 ALTER TABLE `items` ENABLE KEYS */;
+
+
+-- Dump della struttura di tabella ngcms.items_languages
+DROP TABLE IF EXISTS `items_languages`;
+CREATE TABLE IF NOT EXISTS `items_languages` (
+  `idil` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `item_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `lang` varchar(2) NOT NULL DEFAULT '',
   `slug` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`idil`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Dump dei dati della tabella ngcms.items: 19 rows
-/*!40000 ALTER TABLE `items` DISABLE KEYS */;
-REPLACE INTO `items` (`id`, `parent_id`, `lang`, `slug`) VALUES
-	(1, 0, 'it', 'donna'),
-	(2, 0, 'it', 'intimo'),
-	(3, 0, 'it', 'uomo'),
-	(4, 0, 'it', 'bimbi'),
-	(5, 0, 'it', 'scarpe-e-accessori'),
-	(6, 0, 'it', 'moda-mare'),
-	(7, 0, 'it', 'casa'),
-	(8, 0, 'it', 'sconti'),
-	(9, 0, 'it', 'stories'),
-	(10, 0, 'en', 'women'),
-	(11, 0, 'en', 'lingerie'),
-	(12, 0, 'en', 'men'),
-	(13, 0, 'en', 'kids'),
-	(14, 0, 'en', 'shoes-accessories'),
-	(15, 0, 'en', 'summer'),
-	(16, 0, 'en', 'house'),
-	(17, 0, 'en', 'sales'),
-	(18, 0, 'en', 'stories'),
-	(19, 1, 'it', 'abbigliamento-sportivo'),
-	(20, 19, 'it', 'pinocchietto');
-/*!40000 ALTER TABLE `items` ENABLE KEYS */;
+-- Dump dei dati della tabella ngcms.items_languages: 1 rows
+/*!40000 ALTER TABLE `items_languages` DISABLE KEYS */;
+REPLACE INTO `items_languages` (`idil`, `item_id`, `lang`, `slug`) VALUES
+	(1, 7, 'en', ''),
+	(2, 7, 'de', ''),
+	(3, 1, 'it', 'donna'),
+	(4, 1, 'en', 'woman'),
+	(5, 1, 'de', 'frau');
+/*!40000 ALTER TABLE `items_languages` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
