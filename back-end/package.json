@@ -28,6 +28,10 @@
     "babel-register": "^6.9.0",
     "expect": "^1.20.2",
     "mocha": "^2.5.3",
+    "nock": "^8.0.0",
+    "redux": "^3.5.2",
+    "redux-mock-store": "^1.1.2",
+    "redux-thunk": "^2.1.0",
     "webpack": "^1.13.1",
     "zombie": "^4.2.1"
   }
