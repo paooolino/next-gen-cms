@@ -12,6 +12,7 @@ import thunk from 'redux-thunk';
 */
 
 import * as creators from '../src/actionCreators';
+import * as types from '../src/actionTypes';
 import { ENDPOINT_HOST, ENDPOINT_PATH } from '../config';
 
 /*
@@ -25,91 +26,82 @@ const mockStore = configureMockStore(middlewares)
     tests
 */
 
-describe("[actionCreators]", () => {
-    
-    describe('sync', () => {
-        
-        describe("login", () => {
-            it("defines loginRequest action creator", () => {
-                expect(creators.loginRequest).toBeA('function');
-                const action = creators.loginRequest();
-                expect(action).toEqual({
-                    type: 'LOGIN_REQUEST'
-                });
-            });
-            
-            it("defines loginFailure action creator", () => {
-                expect(creators.loginFailure).toBeA('function');
-                const errorMessage = 'Whatever error message';
-                const action = creators.loginFailure(errorMessage);
-                expect(action).toEqual({
-                    type: 'LOGIN_FAILURE',
-                    errorMessage
-                });
-            });
-            
-            it("defines loginSuccess action creator", () => {
-                expect(creators.loginSuccess).toBeA('function');
-                const authCode = 'whatever_auth_code';
-                const action = creators.loginSuccess(authCode);
-                expect(action).toEqual({
-                    type: 'LOGIN_SUCCESS',
-                    authCode
-                });
-            });
-        });
+describe('[actionCreators]', () => {
+  
+  describe('login', () => {
 
-        describe('changeUser', () => {
-            it('defines changeUser action creator', () => {
-                expect(creators.changeUser).toBeA('function');
-                const value = 'admin';
-                const action = creators.changeUser(value);
-                expect(action).toEqual({
-                    type: 'CHANGE_USER',
-                    value
-                });                
-            });
-        });
-        
-        describe('changePass', () => {
-            it('defines changePass action creator', () => {
-                expect(creators.changePass).toBeA('function');
-                const value = 'admin123';
-                const action = creators.changePass(value);
-                expect(action).toEqual({
-                    type: 'CHANGE_PASS',
-                    value
-                });                
-            });
-        });
-        
+    it('defines changeFieldUserInput action creator', () => {
+      const action = creators.changeFieldUserInput('admin');
+      expect(action).toEqual({
+        type: types.CHANGE_FIELD_USER_INPUT,
+        value: 'admin'
+      });                
+    });
+
+    it('defines changeFieldPassInput action creator', () => {
+      const action = creators.changeFieldPassInput('admin123');
+      expect(action).toEqual({
+        type: types.CHANGE_FIELD_PASS_INPUT,
+        value: 'admin123'
+      });                
     });
     
-    describe('async', () => {
-        
-        afterEach(() => {
-            nock.cleanAll()
-        })
-        
-        it("async LOGIN action passes the correct parameters to the server", () => {
-            let passedData;
-            nock(ENDPOINT_HOST).post(ENDPOINT_PATH)
-                .reply(200, function(uri, requestBody){
-                    passedData = requestBody;
-                });
-                
-            const store = mockStore({});
-            
-            const user = 'admin';
-            const pass = 'admin123';
-            return store.dispatch(creators.login(user, pass))
-                .then(() => {
-                    expect(passedData.action).toBe('login');
-                    expect(passedData.user).toBe(user);
-                    expect(passedData.pass).toBe(pass);
-                });
-        });
-        
+    it("defines loginRequest action creator", () => {
+      const action = creators.loginRequest();
+      expect(action).toEqual({
+        type: types.LOGIN_REQUEST
+      });
     });
+    
+    it("defines loginFailure action creator", () => {
+      const action = creators.loginFailure('Whatever error message');
+      expect(action).toEqual({
+        type: types.LOGIN_FAILURE,
+        errorMessage: 'Whatever error message'
+      });
+    });
+    
+    it("defines loginSuccess action creator", () => {
+      const action = creators.loginSuccess('whatever_auth_code');
+      expect(action).toEqual({
+        type: types.LOGIN_SUCCESS,
+        authCode: 'whatever_auth_code'
+      });
+    });
+    
+    describe('async actions', () => {
+      
+      afterEach(() => {
+        nock.cleanAll()
+      })
+      
+      it("async LOGIN action passes the correct parameters to the server", () => {
+        let passedData;
+        nock(ENDPOINT_HOST).post(ENDPOINT_PATH)
+          .reply(200, function(uri, requestBody){
+            passedData = requestBody;
+          });
+            
+        const store = mockStore({});
+        
+        const user = 'admin';
+        const pass = 'admin123';
+        return store.dispatch(creators.login(user, pass))
+          .then(() => {
+            expect(passedData.action).toBe('login');
+            expect(passedData.user).toBe(user);
+            expect(passedData.pass).toBe(pass);
+          });
+      });
+      
+    });
+    
+  });
+  
+  describe('tree management', () => {
+    
+    describe('add item', () => {});
+    
+  });
     
 });
