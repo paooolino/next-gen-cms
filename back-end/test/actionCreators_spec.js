@@ -204,11 +204,11 @@ describe('[actionCreators]', () => {
               
           const store = mockStore({});
           
-          const itemNname = 'admin';
+          const itemName = 'products';
           return store.dispatch(creators.addItem(itemName))
             .then(() => {
               expect(passedData.action).toBe('addItem');
-              expect(passedData.itemNname).toBe(itemName);
+              expect(passedData.itemName).toBe(itemName);
             });
         });
         

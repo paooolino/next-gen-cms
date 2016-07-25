@@ -6,7 +6,7 @@ describe('[treeManagement]', () => {
 
   // login
   describe('Login as admin, admin123', () => {
-    it('should submit the form and see the "NGCMS Admin Panel"', (done) => {
+    xit('should submit the form and see the "NGCMS Admin Panel"', (done) => {
       browser.visit('http://127.0.0.1/next-gen-cms/back-end/build/', () => {
         browser
           .fill('#userInput', 'admin')
@@ -21,7 +21,7 @@ describe('[treeManagement]', () => {
   
   // tree structure
   describe('Add a new "products" item', () => {
-    it('should add the item and see it in the tree', () => {
+    xit('should add the item and see it in the tree', () => {
       browser
         .fill('#newItemNameInput', 'products')
         .pressButton('#addItemButton', () => {
