@@ -30,6 +30,16 @@ describe('[actionTypes]', () => {
     
   describe('tree management', () => {
     
+    describe('fetch items', () => {
+      
+      it('defines action types', () => {
+        expect(types.FETCH_ITEMS_REQUEST).toBe('FETCH_ITEMS_REQUEST');
+        expect(types.FETCH_ITEMS_FAILURE).toBe('FETCH_ITEMS_FAILURE');
+        expect(types.FETCH_ITEMS_SUCCESS).toBe('FETCH_ITEMS_SUCCESS');
+      });
+      
+    });
+    
     describe('add item', () => {
     
       it('defines action types', () => {

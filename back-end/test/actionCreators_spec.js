@@ -69,7 +69,7 @@ describe('[actionCreators]', () => {
       });
     });
     
-    describe('async actions', () => {
+    describe('async', () => {
       
       afterEach(() => {
         nock.cleanAll()
@@ -100,7 +100,121 @@ describe('[actionCreators]', () => {
   
   describe('tree management', () => {
     
-    describe('add item', () => {});
+    describe('fetch items', () => {
+      
+      it("defines fetchItemsRequest action creator", () => {
+        const action = creators.fetchItemsRequest();
+        expect(action).toEqual({
+          type: types.FETCH_ITEMS_REQUEST
+        });
+      });
+      
+      it("defines fetchItemsFailure action creator", () => {
+        const action = creators.fetchItemsFailure('Whatever error message');
+        expect(action).toEqual({
+          type: types.FETCH_ITEMS_FAILURE,
+          errorMessage: 'Whatever error message'
+        });
+      });
+      
+      it("defines fetchItemsSuccess action creator", () => {
+        const items = [{
+          id: 1, 
+          name: 'products'
+        }];
+        const action = creators.fetchItemsSuccess(items);
+        expect(action).toEqual({
+          type: types.FETCH_ITEMS_SUCCESS,
+          items
+        });
+      });
+    
+      describe('async', () => {
+        
+        afterEach(() => {
+          nock.cleanAll()
+        })
+        
+        it("async FETCH_ITEMS action passes the correct parameters to the server", () => {
+          let passedData;
+          nock(ENDPOINT_HOST).post(ENDPOINT_PATH)
+            .reply(200, function(uri, requestBody){
+              passedData = requestBody;
+            });
+              
+          const store = mockStore({});
+          
+          const item_id = 0;
+          return store.dispatch(creators.fetchItems(item_id))
+            .then(() => {
+              expect(passedData.action).toBe('fetchItems');
+              expect(passedData.item_id).toBe(item_id);
+            });
+        });
+        
+      });
+      
+    });
+    
+    describe('add item', () => {
+      
+      it('defines changeFieldNewItemNameInput action creator', () => {
+        const action = creators.changeFieldNewItemNameInput('products');
+        expect(action).toEqual({
+          type: types.CHANGE_FIELD_NEW_ITEM_NAME_INPUT,
+          value: 'products'
+        });                
+      });
+      
+      it("defines addItemRequest action creator", () => {
+        const action = creators.addItemRequest();
+        expect(action).toEqual({
+          type: types.ADD_ITEM_REQUEST
+        });
+      });
+      
+      it("defines addItemFailure action creator", () => {
+        const action = creators.addItemFailure('Whatever error message');
+        expect(action).toEqual({
+          type: types.ADD_ITEM_FAILURE,
+          errorMessage: 'Whatever error message'
+        });
+      });
+      
+      it("defines addItemSuccess action creator", () => {
+        const action = creators.addItemSuccess(1);
+        expect(action).toEqual({
+          type: types.ADD_ITEM_SUCCESS,
+          lastId: 1
+        });
+      });
+    
+      describe('async', () => {
+        
+        afterEach(() => {
+          nock.cleanAll()
+        })
+        
+        it("async ADD_ITEM action passes the correct parameters to the server", () => {
+          let passedData;
+          nock(ENDPOINT_HOST).post(ENDPOINT_PATH)
+            .reply(200, function(uri, requestBody){
+              passedData = requestBody;
+            });
+              
+          const store = mockStore({});
+          
+          const itemNname = 'admin';
+          return store.dispatch(creators.addItem(itemName))
+            .then(() => {
+              expect(passedData.action).toBe('addItem');
+              expect(passedData.itemNname).toBe(itemName);
+            });
+        });
+        
+      });
+      
+    });
     
   });
     

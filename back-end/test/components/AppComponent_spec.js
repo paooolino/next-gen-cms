@@ -39,25 +39,25 @@ describe('[AppComponent]', () => {
     
     describe('rendering', () => {
         
-        it('should render the input.username', () => {
+        xit('should render the input.username', () => {
             const output = setupShallow();
             expect(output.find('.username').length).toBe(1);
             expect(output.find('.username').is('input')).toBe(true);
         });
         
-        it('should render the input.password', () => {
+        xit('should render the input.password', () => {
             const output = setupShallow();
             expect(output.find('.password').length).toBe(1);
             expect(output.find('.password').is('input')).toBe(true);
         });
         
-        it('should render the button.login_button', () => {
+        xit('should render the button.login_button', () => {
             const output = setupShallow();
             expect(output.find('.login_button').length).toBe(1);
             expect(output.find('.login_button').is('button')).toBe(true);
         });
         
-        it('should NOT render the div.loginError when loginError is not empty', () => {
+        xit('should NOT render the div.loginError when loginError is not empty', () => {
             const loginError = '';
             const output = setupShallow({
                 loginError
@@ -65,7 +65,7 @@ describe('[AppComponent]', () => {
             expect(output.find('.loginError').length).toBe(0);
         });
         
-        it('should render the div.loginError when loginError is not empty', () => {
+        xit('should render the div.loginError when loginError is not empty', () => {
             const loginError = 'Whatever error message';
             const output = setupShallow({
                 loginError
@@ -78,7 +78,7 @@ describe('[AppComponent]', () => {
 
     describe('behaviour', () => {
         
-        it('should call handleLogin when the button.login_button is clicked', () => {
+        xit('should call handleLogin when the button.login_button is clicked', () => {
             const handleLogin = expect.createSpy();
             const output = setupShallow({
                 handleLogin,
@@ -90,7 +90,7 @@ describe('[AppComponent]', () => {
             expect(handleLogin.calls[0].arguments).toEqual(['whatever_username', 'whatever_password']);   
         });
 
-        it('should call handleChangeUsername when the input.username is changed', () => {
+        xit('should call handleChangeUsername when the input.username is changed', () => {
             const handleChangeUsername = expect.createSpy();
             const output = setupShallow({
                 handleChangeUsername
@@ -102,7 +102,7 @@ describe('[AppComponent]', () => {
             expect(handleChangeUsername.calls.length).toBe(1);   
         });
         
-        it('should call handleChangePassword when the input.password is changed', () => {
+        xit('should call handleChangePassword when the input.password is changed', () => {
             const handleChangePassword = expect.createSpy();
             const output = setupShallow({
                 handleChangePassword
@@ -118,7 +118,7 @@ describe('[AppComponent]', () => {
 
     describe('proptypes', () => {
         
-        it('should define the correct propTypes', () => {
+        xit('should define the correct propTypes', () => {
             expect(Object.keys(AppComponent.propTypes)).toEqual(Object.keys(defaultProps));
         });
         
