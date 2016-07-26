@@ -18,7 +18,7 @@ import * as types from '../src/actionTypes.js';
 const initialState = {
   fieldUserInput: '',
   fieldPassInput: '',
-  loggedIn: '',
+  loggedIn: false,
   authCode: '',
   requestingLogin: false,
   loginError: ''
@@ -46,7 +46,7 @@ describe("[reducerLogin]", () => {
     };
     const expectedState = {
       ...initialState,
-      user: 'admin'
+      fieldUserInput: 'admin'
     };
     const nextState = reducer(state, action);
     expect(nextState).toEqual(expectedState);
